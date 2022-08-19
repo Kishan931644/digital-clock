@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            background-color: black;
+            color: white;
+        }
+
+        .clock {
+            --color-code: #67dada;
+            font-size: 2rem;
+            padding: .5rem 1rem;
+            margin: 0 2rem 3rem 0;
+            animation: alternate 1s change-color infinite;
+            color: var(--color-code);
+            box-shadow: 5px 3px 20px 17px var(--color-code);
+        }
+
+        @keyframes change-color {
+            0% {
+                --color-code: #67dada;
+            }
+
+            25% {
+
+                --color-code: #239b55;
+            }
+
+            50% {
+                --color-code: #0ae0ab;
+            }
+
+            75% {
+                --color-code: #03bdf5;
+            }
+
+            100% {
+                --color-code: #80dd15;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock"></div>
+</body>
+
+<script>
+    const clock = document.querySelector(".clock");
+    let hours, minutes, seconds, timeline;
+
+    setInterval(() => {
+        let date = new Date();
+        hours = ("0" + date.getHours()).slice(-2);
+        minutes = ("0" + date.getMinutes()).slice(-2);
+        seconds = ("0" + date.getSeconds()).slice(-2);
+        timeline = "AM";
+
+        if (hours > 12) {
+            timeline = "pm";
+            hours = ("0" + (hours % 12)).slice(-2);
+        }
+
+        clock.innerText = hours + ":" + minutes + ":" + seconds + " " + timeline;
+    }, 1000);
+
+</script>
+
+</html>
